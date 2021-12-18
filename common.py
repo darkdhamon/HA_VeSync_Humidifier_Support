@@ -8,6 +8,7 @@ from .const import VS_FANS, VS_LIGHTS, VS_SWITCHES, VS_HUMIDIFIERS
 _LOGGER = logging.getLogger(__name__)
 
 HUMI_DEV_TYPE_TO_HA = {
+    "Classic200S": "humidifier",
     "Classic300S": "humidifier",
     "Dual200S": "humidifier",
 }
