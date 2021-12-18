@@ -1,6 +1,6 @@
 {
-  "domain": "vesync_formatbce",
-  "name": "VeSync-FormatBCE",
+  "domain": "vesync_humidifier",
+  "name": "VeSync-Humidifier",
   "version": "1.0.0",
   "documentation": "https://www.home-assistant.io/integrations/vesync",
   "codeowners": ["@markperdue", "@webdjoe", "@thegardenmonkey", "@formatBCE"],

@@ -1,6 +1,6 @@
 """Constants for VeSync Component."""
 
-DOMAIN = "vesync_formatbce"
+DOMAIN = "vesync_humidifier"
 VS_DISPATCHERS = "vesync_dispatchers"
 VS_DISCOVERY = "vesync_discovery_{}"
 SERVICE_UPDATE_DEVS = "update_devices"
