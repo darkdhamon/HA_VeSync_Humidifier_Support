@@ -19,6 +19,7 @@ DEV_TYPE_TO_HA = {
     "ESWL01": "switch",
     "ESWL03": "switch",
     "ESO15-TB": "outlet",
+    "Classic200S": "humidifier_display",
     "Classic300S": "humidifier_display",
     "Dual200S": "humidifier_display",
     "Dual301S": "humidifier_display",
@@ -116,7 +117,19 @@ class VeSyncLightSwitch(VeSyncBaseSwitch, SwitchEntity):
 
 class VeSyncHumidifierDisplaySwitch(ToggleVeSyncEntity, SwitchEntity):
     """Class for VeSync humidifier display switch Device Representations."""
-       
+
+    @property
+    def device_info(self):
+        return {
+            "identifiers": {
+                # Serial numbers are unique identifiers within a specific domain
+                (DOMAIN, self.unique_id)
+            },
+            "name": self.name,
+            "manufacturer": "Levoit",
+            "model": self.device.device_type,
+        }
+        
     @property
     def name(self):
         return self.device.device_name + " (display)"

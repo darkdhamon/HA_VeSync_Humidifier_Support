@@ -125,7 +125,7 @@ class VeSyncFanHA(ToggleVeSyncEntity, FanEntity):
 
         if hasattr(self.smartfan, "night_light"):
             attr["night_light"] = self.smartfan.night_light
-            
+
         if hasattr(self.smartfan, "display_state"):
             attr["display_state"] = self.smartfan.display_state
 

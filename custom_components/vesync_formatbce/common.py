@@ -17,6 +17,7 @@ from .const import DOMAIN, VS_FANS, VS_LIGHTS, VS_SWITCHES, VS_HUMIDIFIERS, SCAN
 _LOGGER = logging.getLogger(__name__)
 
 HUMI_DEV_TYPE_TO_HA = {
+    "Classic200S": "humidifier",
     "Classic300S": "humidifier",
     "Dual200S": "humidifier",
     "Dual301S": "humidifier",
@@ -81,13 +82,13 @@ async def async_process_devices(hass: HomeAssistant, manager: VeSync) -> Dict[st
             if HUMI_PROPS.get(fan.device_type):
                 if (VS_HUMIDIFIERS in HUMI_PROPS.get(fan.device_type)):
                     devices[VS_HUMIDIFIERS].append(coordinated_fan)
-                    humidifiers_count += 1
+                humidifiers_count += 1
                 if (VS_SWITCHES in HUMI_PROPS.get(fan.device_type)):
                     devices[VS_SWITCHES].append(coordinated_fan)
-                    switches_count += 1
+                switches_count += 1
                 if (VS_LIGHTS in HUMI_PROPS.get(fan.device_type)):
                     devices[VS_LIGHTS].append(coordinated_fan)
-                    lights_count += 1
+                lights_count += 1
             else:
                 devices[VS_FANS].append(coordinated_fan)
                 fans_count += 1
@@ -166,6 +167,11 @@ class VeSyncEntity(CoordinatorEntity):
         return self.device.device_name
 
     @property
+    def is_on(self):
+        """Return True if device is on."""
+        return self.device.device_status == "on"
+
+    @property
     def available(self) -> bool:
         """Return True if device is available."""
         return self.device.connection_status == "online"
@@ -191,3 +197,7 @@ class ToggleVeSyncEntity(VeSyncEntity, ToggleEntity):
     def turn_off(self, **kwargs):
         """Turn the device off."""
         self.device.turn_off()
+
+    def update(self):
+        """Update vesync device."""
+        self.device.update()

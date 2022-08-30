@@ -11,6 +11,5 @@ VS_FANS = "fans"
 VS_HUMIDIFIERS = "humidifiers"
 VS_LIGHTS = "lights"
 VS_MANAGER = "manager"
-
 SCAN_INTERVAL = timedelta(seconds=1)
 DEBOUNCE_COOLDOWN = 15  # Seconds

@@ -143,7 +143,19 @@ class VeSyncDimmableLightHA(VeSyncBaseLight, LightEntity):
 
 class VeSyncHumidifierNightLightHA(ToggleVeSyncEntity, LightEntity):
     """Representation of a VeSync humidifier night light device."""
-       
+
+    @property
+    def device_info(self):
+        return {
+            "identifiers": {
+                # Serial numbers are unique identifiers within a specific domain
+                (DOMAIN, self.unique_id)
+            },
+            "name": self.name,
+            "manufacturer": "Levoit",
+            "model": self.device.device_type,
+        }
+        
     @property
     def name(self):
         """Name of light entity"""

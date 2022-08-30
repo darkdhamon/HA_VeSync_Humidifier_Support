@@ -23,6 +23,7 @@ MANUAL_MID = "manual mid"
 MANUAL_HIGH = "manual high"
 
 PRESET_MODES = {
+    "Classic200S": [MODE_AUTO, MANUAL_LOW, MANUAL_MID, MANUAL_HIGH ],
     "Classic300S": [MODE_AUTO, MODE_SLEEP, MANUAL_LOW, MANUAL_MID, MANUAL_HIGH],
     "Dual200S": [MODE_AUTO, MODE_SLEEP, MANUAL_LOW, MANUAL_MID, MANUAL_HIGH],
     "Dual301S": [MODE_AUTO, MODE_SLEEP, MANUAL_LOW, MANUAL_MID, MANUAL_HIGH],
@@ -61,6 +62,18 @@ def _async_setup_entities(devices: List[CoordinatedVeSyncDevice], async_add_enti
 
 class VeSyncHumidifierHA(ToggleVeSyncEntity, HumidifierEntity):
     """Representation of a VeSync humidifier."""
+
+    @property
+    def device_info(self):
+        return {
+            "identifiers": {
+                # Serial numbers are unique identifiers within a specific domain
+                (DOMAIN, self.unique_id)
+            },
+            "name": self.name,
+            "manufacturer": "Levoit",
+            "model": self.device.device_type,
+        }
 
     @property
     def is_on(self):
